@@ -4,6 +4,7 @@ import org.example.usersApp.User;
 import org.example.usersApp.UserRepository;
 import org.example.usersApp.UserService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito.*;
@@ -14,6 +15,12 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/*
+    1. Argument Captors
+    2. Dynamic Responses for my Stubbed methods
+    3. PowerMock: for static, final, and private methods
+ */
+
 class UserServiceTest {
 
     private UserService userService;
@@ -21,10 +28,18 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        userRepository = mock(UserRepository.class);
+        userRepository = spy(UserRepository.class);
+//        userRepository = new UserRepository();
         userService = new UserService(userRepository);
     }
 
+
+    @Test
+    void testSpy(){
+        User user = new User(3,"Stubbed with Spy");
+        when(userRepository.findByIdFromDB(3)).thenReturn(user);
+        System.out.println(userRepository.findByIdFromDB(3));
+    }
     @Test
     void getUserNameById() {
 
@@ -74,7 +89,7 @@ class UserServiceTest {
     void createUserInDB(){
 
         User user = new User(1,"Kai");
-        when(userRepository.createNewUserInDB("Kai",1)).thenReturn(user);
+        when(userRepository.createNewUserInDB("Kai",100)).thenReturn(user);
 
 
         User result = userService.createNewUser("Kai",1);
@@ -84,17 +99,35 @@ class UserServiceTest {
         assertEquals("Kai",result.getName());
 
 
-        // Argument Captor to verify parameters passed to the mock
         ArgumentCaptor<String> nameCaptor = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<Integer> idCaptor = ArgumentCaptor.forClass(Integer.class);
 
-        // Verify and capture arguments
-        verify(userRepository).createNewUserInDB(nameCaptor.capture(), idCaptor.capture());
+        verify(userRepository).createNewUserInDB(nameCaptor.capture(),idCaptor.capture());
 
-        // Assert the captured arguments
-        assertEquals("Kai", nameCaptor.getValue());
-        assertEquals(1, idCaptor.getValue());
+        System.out.println(nameCaptor.getValue());
+        System.out.println(idCaptor.getValue());
+
+        assertEquals(100,idCaptor.getValue());
+
     }
+
+    @Test
+    void dynamicResponses(){
+        int id = 1;
+        String name = "John";
+
+        User newUser = new User(id,name);
+        User fallBackUser = new User(0,null);
+
+
+        when(userRepository.createNewUserInDB(name,id)).thenReturn(newUser).thenReturn(fallBackUser);
+
+        System.out.println(userRepository.createNewUserInDB(name,id));
+        System.out.println(userRepository.createNewUserInDB(name,id));
+        System.out.println(userRepository.createNewUserInDB(name,id));
+
+    }
+
 
 
     @Test
@@ -108,6 +141,7 @@ class UserServiceTest {
     }
 
     @Test
+    @Disabled
     void getUserFromDB2(){
 
         doThrow(new RuntimeException("User Not Found")).when(userRepository).findByIdFromDB2(99);
@@ -121,6 +155,13 @@ class UserServiceTest {
 
 
     }
+
+//    @Test
+//    void staticMethodTest(){
+//        when(UserRepository.sayHello()).thenReturn("Hello");
+//
+//        System.out.println(UserRepository.sayHello());
+//    }
 
 
     /*

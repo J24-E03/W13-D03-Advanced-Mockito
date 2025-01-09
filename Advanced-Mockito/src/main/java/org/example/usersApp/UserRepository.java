@@ -25,9 +25,10 @@ public class UserRepository {
     }
 
     public User createNewUserInDB(String name, int id){
-        User newUser = new User(id,name);
-        users.add(newUser);
-        return newUser;
+//        User newUser = new User(id,name);
+//        users.add(newUser);
+//        return newUser;
+        return null;
     }
 
     public User findByIdFromDB(int id){
@@ -46,6 +47,17 @@ public class UserRepository {
             }
         }
         throw new RuntimeException("User Not Found");
+    }
+    private String sayHelloPrivate(){
+        return "Hello Class";
+    }
+
+    public static String sayHelloStatic() {
+        return "Hello from original method";
+    }
+
+    public final String sayHelloFinal(){
+        return "Hello from final";
     }
 
 

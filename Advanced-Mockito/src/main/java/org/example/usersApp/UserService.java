@@ -12,7 +12,7 @@ public class UserService {
     }
 
     public String getUserNameById(int id){
-        User foundUser = userRepository.findByIdFromDB2(id);
+        User foundUser = userRepository.findByIdFromDB(id);
         return foundUser == null ? "User Not Found" : foundUser.getName();
     }
 
@@ -28,8 +28,10 @@ public class UserService {
         if (id <= 0) {
             throw new IllegalArgumentException("ID must be a positive number");
         }
-        return userRepository.createNewUserInDB(name, id);
+        return userRepository.createNewUserInDB(name, id*100);
     }
+
+
 
 
 
