@@ -28,11 +28,22 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        userRepository = spy(UserRepository.class);
-//        userRepository = new UserRepository();
+        // injecting the mock
+        userRepository = mock(UserRepository.class);
+        // spy is the same class as UserRepository,
+        //userRepository = spy(UserRepository.class);
         userService = new UserService(userRepository);
     }
 
+    //    @Test
+//    void testSpy() {
+//       // if I don't stub, then it will call the actual methods
+//        User user = new User(3,"Maryam");
+//        when(userRepository.findByIdFromDB(3)).thenReturn(user);
+//        System.out.println(userRepository.findByIdFromDB(3));
+//        System.out.println(userRepository.findByIdFromDB(2));
+//
+//    }
 
     @Test
     void testSpy(){

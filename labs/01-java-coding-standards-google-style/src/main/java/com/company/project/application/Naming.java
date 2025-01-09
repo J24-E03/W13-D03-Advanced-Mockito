@@ -1,3 +1,4 @@
+// File: Naming.java
 package com.company.project.application;
 
 import java.text.ParseException;
@@ -5,23 +6,40 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Example class containing some sections that violate the Google Java Style Guide.
+ * Provides naming-related utility methods.
  */
 public class Naming {
 
-  public static final String datePatternConstant = "dd.MM.yyyy";
+  public static final String DATE_PATTERN = "dd.MM.yyyy";
 
-  public static boolean IsTrue() {
+  /**
+   * Checks if the given input is true.
+   *
+   * @return True always.
+   */
+  public static boolean isTrue() {
     return true;
   }
 
-  public static boolean isBoolean(Boolean input_value) {
-    return input_value instanceof Boolean;
+  /**
+   * Checks if the input value is a Boolean instance.
+   *
+   * @param inputValue The input to check.
+   * @return True if the input is a Boolean, false otherwise.
+   */
+  public static boolean isBoolean(Boolean inputValue) {
+    return inputValue instanceof Boolean;
   }
 
+  /**
+   * Parses a date string into a Date object.
+   *
+   * @param inputString The date string to parse.
+   * @return A Date object representing the parsed date.
+   * @throws ParseException If the input string cannot be parsed.
+   */
   public Date parseDateString(String inputString) throws ParseException {
-    SimpleDateFormat dateFormat = new SimpleDateFormat(datePatternConstant);
+    SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_PATTERN);
     return dateFormat.parse(inputString);
   }
-
 }
