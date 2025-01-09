@@ -13,7 +13,7 @@ public class Utility {
         return getMessage(name);
     }
 
-    private String getMessage(String name) {
+    public String getMessage(String name) {
         return greetingService.getGreetingMessage(name);
     }
 
