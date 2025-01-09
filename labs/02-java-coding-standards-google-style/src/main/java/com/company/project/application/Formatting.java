@@ -7,8 +7,7 @@ import java.util.Date;
  * Example class containing some sections that violate the Google Java Style Guide.
  */
 public class Formatting {
-
-    public static final String DATE_PATTERN_GER = "dd.MM.yyyy";
+  public static final String DATE_PATTERN_GER = "dd.MM.yyyy";
 
   /**
    * Checks if the given date fits the current year. Returns true if that is the case.
@@ -19,17 +18,13 @@ public class Formatting {
 
     Calendar calNow = Calendar.getInstance();
 
-    if (calInput.get(Calendar.YEAR) == calNow.get(Calendar.YEAR))
-      return true;
-
-    return false;
+    return calInput.get(Calendar.YEAR) == calNow.get(Calendar.YEAR);
   }
 
   /**
    * Checks if the given date fits the current month. Returns true if that is the case.
    */
-  public boolean isCurrentMonth(Date date)
-  {
+  public boolean isCurrentMonth(Date date) {
     Calendar calInput = Calendar.getInstance();
     calInput.setTime(date);
 
@@ -37,6 +32,4 @@ public class Formatting {
 
     return (calInput.get(Calendar.MONTH) == calNow.get(Calendar.MONTH));
   }
-
-
 }
