@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Formatting {
 
-    public static final String DATE_PATTERN_GER = "dd.MM.yyyy";
+  public static final String DATE_PATTERN_GER = "dd.MM.yyyy";
 
   /**
    * Checks if the given date fits the current year. Returns true if that is the case.
@@ -19,17 +19,16 @@ public class Formatting {
 
     Calendar calNow = Calendar.getInstance();
 
-    if (calInput.get(Calendar.YEAR) == calNow.get(Calendar.YEAR))
-      return true;
+    return (calInput.get(Calendar.YEAR) == calNow.get(Calendar.YEAR));
 
-    return false;
+
+
   }
 
   /**
    * Checks if the given date fits the current month. Returns true if that is the case.
    */
-  public boolean isCurrentMonth(Date date)
-  {
+  public boolean isCurrentMonth(Date date) {
     Calendar calInput = Calendar.getInstance();
     calInput.setTime(date);
 
