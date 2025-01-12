@@ -1,6 +1,6 @@
 package com.company.project.application;
 
-import com.company.project.application.configuration.*;
+import com.company.project.application.configuration.FileStructureConfig;
 
 /**
  * Checks if the given date fits the current month. Returns true if that is the case.
